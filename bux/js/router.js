@@ -36,30 +36,7 @@ String.prototype.router = function(a, b=a ? a : {}, pop=b.pop ? b.pop : null, pa
               view.dataset.root = root;
               view.dataset.page = paths.page;
               view.dataset.path = paths.path;
-          }
-
-
-            /*JS*/
-            var medias = view.querySelectorAll('[data-style="CascadingGrid"]');
-            if(medias.length > 0) { var ff = 0; do { 
-                    var media = medias[ff];
-                    var style = media.dataset.style;
-                    if(style === 'CascadingGrid') {
-                            var formats = media.querySelectorAll('format');
-                            if(formats.length > 0 && formats.length>=media.dataset.limit) {
-                                    var last = formats[formats.length - 1];
-                                    var height = last.offsetTop + last.offsetHeight;
-                                    media.style.height = height+'px';
-                                    media.style.paddingTop = 0;
-                            }
-                            else { media.remove(); }
-                    }
-                    if(media.dataset.x) {
-                            if(media.dataset.x === "end") { media.scrollLeft = media.clientWidth + media.scrollWidth; }
-                    }
-            ff++; } while(ff < medias.length); }
-            /*JS*/
-          
+          }          
 
           var path = packet && packet.state ? packet.state : paths.path; //console.log({path});
           window.GET = paths.GOT;
