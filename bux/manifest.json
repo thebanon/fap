@@ -1,0 +1,9 @@
+{
+    "name": "FapBux",
+    "short_name": "fapbux",
+    "theme_color": "#333",
+    "background_color": "#262626",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait"
+}
