@@ -58,14 +58,13 @@ function view(paths) {
 
     var get = paths.GOT;
     var root = paths.GOT[0];
-    var x2 = true;
+    var port = document.body.find('[data-port="'+paths.path+'"]');
 
     document.body.removeAttribute('data-menu');
 
-    var port = document.body.find('[data-port="'+paths.path+'"]');
     if(root) {
-      port ? document.body.dataset.root = (port.closest('.view') ? port.closest('.view').dataset.root = root : null) : port = document.body.find('[data-port="'+paths.page+'"]');
-      //console.log('CHECK',{paths}); //console.log({port},paths.page);
+      if(port && port.closest('.view')) { document.body.dataset.root = port.closest('.view').dataset.root = root; }      
+      if(!port) { port = document.body.find('[data-port="'+paths.page+'"]'); }
     } 
     else { 
         port = document.body.find('[data-port="/"]');
@@ -75,16 +74,10 @@ function view(paths) {
     
     if(root) {
         
-      if(root === 'video') { }
+      if(root === 'video') { resolve(paths); }
       
     }
-    else { 
-      body.removeAttribute('data-profile');
-      window.mediaStream ? mediaStream.getTracks().forEach(track => track.stop()) : null;
-      resolve(paths);
-    }
-    x2 = true;  
-    dom.spriii.classList[x2 ? 'add' : 'remove']('x2');
+    else { resolve(paths);  }
   });
 }
 window.route = state => { //console.log({state});
