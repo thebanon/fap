@@ -15,6 +15,30 @@ window.is = {
 
 window.tld = () => { return is.local() ? 'localhost' : 'com'; }
 
+window.func = {
+  home: (html,page) => {        
+    ajax('/html/home.html').then(html => { 
+      //func.home(html,document.body.find('[data-port="/"]'))
+      var page = byId('article-index');
+      page.innerHTML = html;
+      //ajax(api.endpoint()+'/v1/read/blocks',{data:mvc.m.block(page.find('feed')),dataType:"POST"}).then((j,json=JSON.parse(j)) => {
+        //mvc.v.page.home(html,json).then(() => tion.ialize(ion.ia));
+      //}).catch(() => tion.ialize(ion.ia));
+    });
+  }
+};
+window.tion = {
+  ia: 0,
+  ialize: pg => {
+      ion.ia++;
+      if(ion.ia === Object.keys(func).length) { firebase.auth().onAuthStateChanged(user => {
+        auth.change(user).then(goto => { console.log({goto});
+          goto = (user && document.body.dataset.ppp === '/my/account/') ? '/' : window.location.pathname;
+          goto.router();
+        });
+      }); }
+  }
+};
 function init(url) {
     
   return new Promise((resolve, reject) => {
@@ -42,6 +66,11 @@ function init(url) {
                                    
     //dom.footer.addEventListener("touchstart", on.touch, {passive: true});
     //dom.footer.addEventListener("touchmove", on.touch, {passive: true});
+    
+    var idx = Object.keys(func);
+    var keys = Object.keys(func);
+    var p = 0; do { func[keys[p]](); p++; } while(p < keys.length);
+
 
   });
     
