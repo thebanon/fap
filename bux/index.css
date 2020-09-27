@@ -15,4 +15,3 @@
 
 [data-before]:before { content: attr(data-before); }
 [data-after]:after { content: attr(data-after); }
-1F464.svg
