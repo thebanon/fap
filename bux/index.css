@@ -55,7 +55,7 @@
 }
 @media screen and (max-width: 768px) {
     .article-index {padding: 50px 0 20px;}
-    [data-uid="recent-videos"] {width: calc((100% - 20px)/1);}
+    .section-video {width: calc((100% - 20px)/1);}
     .section-video .media-video {width: calc((100% - 10px)/2);}
     .section-video .media-video:nth-child(6n) { margin-right: 10px; }
     .section-video .media-video:nth-child(5n) { margin-right: 10px; }
