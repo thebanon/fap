@@ -16,10 +16,11 @@
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <link async rel="stylesheet" href="/index.css" media="all">
         <script src='/js/jpurey.js'></script>
-        <script async src='/index.js'></script>
+        <script src='/index.js'></script>
+        <script async src='/js/on.js'></script>
     </head>
 
-    <body class="body loading" id="body" data-mode="lite" data-nojs onload="init(window.location.pathname+window.location.hash+window.location.search)"><!--
+    <body class="body loading" id="body" data-mode="lite" data-nojs onclick="on.click.body(event)" onload="init(window.location.pathname+window.location.hash+window.location.search)"><!--
 
         --><noscript>
             <div>Javascript Required</div>
