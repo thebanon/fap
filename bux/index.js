@@ -17,7 +17,7 @@ window.tld = () => { return is.local() ? 'localhost' : 'com'; }
 
 window.func = {
   home: (html,page) => {        
-    ajax('/html/home.html').then(html => { 
+    ajax('/html/www.index.html').then(html => { 
       //func.home(html,document.body.find('[data-port="/"]'))
       var page = byId('article-index');
       page.innerHTML = html;
@@ -67,7 +67,6 @@ function init(url) {
     //dom.footer.addEventListener("touchstart", on.touch, {passive: true});
     //dom.footer.addEventListener("touchmove", on.touch, {passive: true});
     
-    var idx = Object.keys(func);
     var keys = Object.keys(func);
     var p = 0; do { func[keys[p]](); p++; } while(p < keys.length);
 
