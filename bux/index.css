@@ -17,6 +17,40 @@
 .body-main {width: 100%;min-height: 100%;display: block;background: #262626;position: relative;z-index: 123;}
 
 .section-video {width: calc(100% - 20px);padding: 60px 0 0;margin: auto;}
-.section-video .media-video {display: inline-block;width: calc((100% - 50px)/6);background: #111;margin: 0 10px 10px 0;}
+.section-video .media-video {display: inline-block;width: calc((100% - 50px)/6);background: #111;margin-right: 10px;margin-bottom: 10px;}
 .section-video .media-video:nth-child(6n) { margin-right: 0; }
 .section-video .media-video .header-video { width: 100%; padding-top: 56.25%; height: 0; }
+@media screen and (max-width: 1600px) {
+    .section-video .media-video { width: calc((100% - 40px)/5); }
+    .section-video .media-video:nth-child(6n) { margin-right: 10px;}
+    .section-video .media-video:nth-child(5n) { margin-right: 0; }
+}
+@media screen and (max-width: 1280px) {
+    .section-video .media-video { width: calc((100% - 30px)/4); }
+    .section-video .media-video:nth-child(6n) { margin-right: 10px;}
+    .section-video .media-video:nth-child(5n) { margin-right: 10px; }
+    .section-video .media-video:nth-child(4n) { margin-right: 0px; }
+}
+@media screen and (max-width: 1024px) {
+    .section-video .media-video { width: calc((100% - 20px)/3); }
+    .section-video .media-video:nth-child(6n) { margin-right: 10px; }
+    .section-video .media-video:nth-child(5n) { margin-right: 10px; }
+    .section-video .media-video:nth-child(4n) { margin-right: 10px; }
+    .section-video .media-video:nth-child(3n) { margin-right: 0px; }
+}
+@media screen and (max-width: 768px) {
+    .section-video .media-video {width: calc((100% - 20px)/2);}
+    .section-video .media-video:nth-child(6n) { margin-right: 10px; }
+    .section-video .media-video:nth-child(5n) { margin-right: 10px; }
+    .section-video .media-video:nth-child(4n) { margin-right: 10px; }
+    .section-video .media-video:nth-child(3n) { margin-right: 10px; }
+    .section-video .media-video:nth-child(2n) { margin-right: 0px; }
+}
+@media screen and (max-width: 480px) {
+    .section-video .media-video {width: calc((100% - 0px)/1);}
+    .section-video .media-video:nth-child(6n) { margin-right: 10px; }
+    .section-video .media-video:nth-child(5n) { margin-right: 10px; }
+    .section-video .media-video:nth-child(4n) { margin-right: 10px; }
+    .section-video .media-video:nth-child(3n) { margin-right: 10px; }
+    .section-video .media-video:nth-child(2n) { margin-right: 10px; }
+}
