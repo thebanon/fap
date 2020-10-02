@@ -21,7 +21,7 @@
 
 .section-video {width: calc(100% - 0px);margin: auto;}
 
-.section-video, .tags {width: 1920px;max-width: calc(100% - 0px);margin: auto;/* margin-bottom: 20px; */}
+.section-video, .stars, .tags {width: 1920px;max-width: calc(100% - 0px);margin: auto;/* margin-bottom: 20px; */}
 .tags { display: none; }
 
 .section-video .media-video {display: inline-block;width: calc((100% - 50px)/6);margin-right: 10px;margin-top: 20px;}
