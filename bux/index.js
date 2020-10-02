@@ -16,11 +16,28 @@ window.is = {
 window.tld = () => { return is.local() ? 'localhost' : 'com'; }
 
 window.func = {
-  home: (html,page) => {        
+  home: () => {        
     ajax('/html/www.index.html').then(html => { 
       //func.home(html,document.body.find('[data-port="/"]'))
       var page = byId('article-index');
       page.innerHTML = html;
+      ajax('/json/freaks.json').then((j,json=JSON.parse(j)) => { 
+        console.log(json);
+      });
+      ajax('/json/videos.json').then((j,json=JSON.parse(j)) => { console.log(json);
+        var videos = json.videos;
+        if(videos.length > 0) { 
+          var i = 0, html = ``; do {
+            var row = videos[i];
+            html += `<div class="media-video">`;
+              html += `<header class="header-video"><div><a></a><a>`+row.stars[0].replace('_',' ').replace('-',' ')+`</a></div></header>`;
+              html += `<section class="section-video"><picture><img src="`+row.thumbnail+`"></picture></section>`;
+              html += `<footer class="footer-video"><div>`+row.title+`</div></footer>`;
+            html += `</div>`;
+           i++; } while(i < videos.length);
+           page.find('.section-video').innerHTML = html;
+        }
+      });
       //ajax(api.endpoint()+'/v1/read/blocks',{data:mvc.m.block(page.find('feed')),dataType:"POST"}).then((j,json=JSON.parse(j)) => {
         //mvc.v.page.home(html,json).then(() => tion.ialize(ion.ia));
       //}).catch(() => tion.ialize(ion.ia));
