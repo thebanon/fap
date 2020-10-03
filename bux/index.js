@@ -21,13 +21,13 @@ window.func = {
       //func.home(html,document.body.find('[data-port="/"]'))
       var page = byId('article-index');
       page.innerHTML = html;
-      ajax('/json/freaks.json').then((j,json=JSON.parse(j)) => {
+      ajax('/json/volume/1.freaks.json').then((j,json=JSON.parse(j)) => {
         var html = ``; j = 0; 
         do { html += `<picture><img src='/jpg/avatar/`+json[j]+`.jpg'></picture>`; j++; }
         while(j < 10 && j < json.length);
         page.find('.stars').innerHTML = html;
       });
-      ajax('/json/volume/1.json').then((j,json=JSON.parse(j)) => {
+      ajax('/json/volume/1.videos.json').then((j,json=JSON.parse(j)) => {
         var videos = json.videos;
         if(videos.length > 0) { 
           var i = 0, html = ``; do {
