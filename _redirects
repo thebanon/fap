@@ -7,6 +7,7 @@ https://fapbux.com/sw.js /bux/sw.js 200
 https://fapbux.com/css/* /bux/css/:splat 200
 https://fapbux.com/gif/* /bux/gif/:splat 200
 https://fapbux.com/html/* /bux/html/:splat 200
+https://fapbux.com/jpg/* /bux/jpg/:splat 200
 https://fapbux.com/js/* /bux/js/:splat 200
 https://fapbux.com/json/* /bux/json/:splat 200
 https://fapbux.com/png/* /bux/png/:splat 200
