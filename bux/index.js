@@ -21,14 +21,16 @@ window.func = {
       //func.home(html,document.body.find('[data-port="/"]'))
       var page = byId('article-index');
       page.innerHTML = html;
-      ajax('/json/volume/1.json').then((j,json=JSON.parse(j)) => {
 
-        var freaks = json.freaks;
+      ajax('/json/stars.json').then((j,json=JSON.parse(j)) => {
+        var freaks = json;
         var html = ``; f = 0; 
         do { html += `<picture><img src='/jpg/avatar/`+freaks[f]+`.jpg'></picture>`; f++; }
         while(f < 10 && f < freaks.length);
-        page.find('.stars').innerHTML = html;        
+        page.find('.stars').innerHTML = html;
+      });
 
+      ajax('/json/volume/1.json').then((j,json=JSON.parse(j)) => {  
         var videos = json.videos;
         if(videos.length > 0) { 
           var i = 0, html = ``; do {
@@ -45,7 +47,6 @@ window.func = {
            i++; } while(i < 60 && i < videos.length);
            page.find('.section-video').innerHTML = html;
         }
-
       });
       //ajax(api.endpoint()+'/v1/read/blocks',{data:mvc.m.block(page.find('feed')),dataType:"POST"}).then((j,json=JSON.parse(j)) => {
         //mvc.v.page.home(html,json).then(() => tion.ialize(ion.ia));
