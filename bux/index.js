@@ -21,13 +21,14 @@ window.func = {
       //func.home(html,document.body.find('[data-port="/"]'))
       var page = byId('article-index');
       page.innerHTML = html;
-      ajax('/json/volume/1.freaks.json').then((j,json=JSON.parse(j)) => {
-        var html = ``; j = 0; 
-        do { html += `<picture><img src='/jpg/avatar/`+json[j]+`.jpg'></picture>`; j++; }
-        while(j < 10 && j < json.length);
-        page.find('.stars').innerHTML = html;
-      });
-      ajax('/json/volume/1.videos.json').then((j,json=JSON.parse(j)) => {
+      ajax('/json/volume/1.json').then((j,json=JSON.parse(j)) => {
+
+        var freaks = json.freaks;
+        var html = ``; f = 0; 
+        do { html += `<picture><img src='/jpg/avatar/`+freaks[f]+`.jpg'></picture>`; f++; }
+        while(f < 10 && f < freaks.length);
+        page.find('.stars').innerHTML = html;        
+
         var videos = json.videos;
         if(videos.length > 0) { 
           var i = 0, html = ``; do {
@@ -44,6 +45,7 @@ window.func = {
            i++; } while(i < 60 && i < videos.length);
            page.find('.section-video').innerHTML = html;
         }
+
       });
       //ajax(api.endpoint()+'/v1/read/blocks',{data:mvc.m.block(page.find('feed')),dataType:"POST"}).then((j,json=JSON.parse(j)) => {
         //mvc.v.page.home(html,json).then(() => tion.ialize(ion.ia));
