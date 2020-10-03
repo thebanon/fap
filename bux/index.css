@@ -24,6 +24,8 @@
 .article-index {padding: 50px 20px 20px;}
 
 .header-video { text-align: left; line-height: 50px; }
+.header-video .freak { display: inline-block; margin-right: 10px; }
+
 .section-video {width: calc(100% - 0px);margin: auto;}
 
 .index-videos, .stars, .tags {width: 1920px;max-width: calc(100% - 0px);margin: auto;text-align: center;/* margin-bottom: 20px; */}

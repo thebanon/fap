@@ -34,7 +34,9 @@ window.func = {
             var row = videos[i];
             html += `<div class="media-video">`;
               html += `<header class="header-video">`;
-                html += `<div><a></a><a>`+row.stars[0].replace('_',' ').replace('-',' ')+`</a></div>`;
+                var s = 0; do {
+                  html += `<div class="freak"><a></a><a>`+row.stars[s].replace('_',' ').replace('-',' ')+`</a></div>`;
+                s++; } while(s < row.stars.length)
               html += `</header>`;
               html += `<section class="section-video"><picture><img src="`+row.thumbnail+`"></picture></section>`;
               html += `<footer class="footer-video"><div>`+row.title+`</div></footer>`;
