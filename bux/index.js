@@ -17,10 +17,12 @@ window.tld = () => { return is.local() ? 'localhost' : 'com'; }
 
 window.func = {
   home: () => {        
-    ajax('/html/www.index.html').then(html => { 
-      //func.home(html,document.body.find('[data-port="/"]'))
+    ajax('/html/www.index.html').then(html => { //func.home(html,document.body.find('[data-port="/"]'))
+      
       var page = byId('article-index');
       page.innerHTML = html;
+
+      ajax('/json/volumes.json').then((j,json=JSON.parse(j)) => { });
 
       ajax('/json/stars.json').then((j,json=JSON.parse(j)) => {
         var freaks = json;
