@@ -23,6 +23,11 @@
 .section-video {width: calc(100% - 0px);margin: auto;}
 
 .index-videos, .stars, .tags {width: 1920px;max-width: calc(100% - 0px);margin: auto;text-align: center;/* margin-bottom: 20px; */}
+
+.stars > * {width: calc((100% - 180px)/10);padding-top: calc((100% - 180px)/10);height: 0;border-radius: 50%;display: inline-block;vertical-align: top;border-radius: 50%;overflow: hidden;position: relative;margin: 20px 20px 20px 0;}
+.stars > picture:last-child { margin-right: 0; }
+.stars picture img { width: 100%; height: 100%; position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
+
 .tags {/* display: none; */}
 
 .section-video .media-video {display: inline-block;vertical-align: top;width: calc((100% - 50px)/6);margin-right: 10px;margin-top: 20px;}
