@@ -1,17 +1,15 @@
 String.prototype.router = function(a, b=a ? a : {}, pop=b.pop ? b.pop : null, path=this.valueOf().replace(/\/?$/, '/')) { //window.location.href = state;
-  return new Promise(function(resolve, reject) {
+  return new Promise(function(resolve, reject) { 
     path ? view(route(path)).then(data => {
 
         var paths = data.paths ? data.paths : path, packet = null;
-        console.log(1,{data,paths});
         if(Object.keys(data).includes('paths')) {
           var packet = data.packet;
           paths = data.paths;
         } 
         else { paths = data; }
-        console.log(2,{data,paths});
         
-        return new Promise(function(resolve, reject) { console.log({paths});
+        return new Promise(function(resolve, reject) {
 
           var root = paths.GOT[0];
           var port = document.body.find('[data-page="'+paths.page+'"]');
@@ -22,29 +20,29 @@ String.prototype.router = function(a, b=a ? a : {}, pop=b.pop ? b.pop : null, pa
           //console.log(global.ppp, paths.page);
           if(global.ppp.includes(paths.page)) {
             document.body.dataset.ppp = paths.page;
-            document.body.dataset.url = paths.path;
+            document.body.dataset.url = paths.port;
           } 
           else {
             document.body.dataset.page = paths.page;
-            document.body.dataset.path = paths.path;
+            document.body.dataset.port = paths.port;
             document.body.removeAttribute('data-ppp');
             document.body.removeAttribute('data-url');
           }
-    
-          var view = paths.port.closest('.view');
+          
+          var view = paths.section.closest('.page');
           if(port) {
               view.dataset.root = root;
               view.dataset.page = paths.page;
-              view.dataset.path = paths.path;
+              view.dataset.port = paths.port;
           }          
 
-          var path = packet && packet.state ? packet.state : paths.path; //console.log({path});
+          var path = packet && packet.state ? packet.state : paths.port; //console.log({path});
           window.GET = paths.GOT;
           document.body.classList.contains('loading') ? document.body.classList.remove('loading') : null;
           auth.user() ?
             document.body.dataset.uid = auth.user().uid : 
             (document.body.dataset.uid ? document.body.removeAttribute('uid') : null);
-          history.pushState(path,'Spriii',path);
+          history.pushState(path,'FapBux',path);
           window.scrollTo(0,0);
           resolve(paths);
 
@@ -70,14 +68,21 @@ function view(paths) {
         port = document.body.find('[data-port="/"]');
         document.body.removeAttribute('data-root');
     }
-    paths.port = port;
     
     if(root) {
         
-      if(root === 'video') { resolve(paths); }
+      if(root === 'video') { resolve({paths}); }
+      else if(root === 'volume') { 
+        if(get.length > 1) {
+          if(get.length > 2) { mvc.v.page.volume.video({paths}); }
+          else { }
+        }
+        resolve({paths});
+      }
+      else { resolve({paths}); }
       
     }
-    else { resolve(paths);  }
+    else { resolve({paths});  }
   });
 }
 window.route = state => { //console.log({state});
@@ -87,16 +92,16 @@ window.route = state => { //console.log({state});
     if(GOT.length > 0) { do { var m = GOT[n];
 
       if(m.includes('#') || (
-        (root === 'video' && n === 2)
+        (root === 'volume' && GOT.length === 2 && n === 1) ||
+        (root === 'volume' && GOT.length === 3 && n > 0 && n < 3)
       )) { arr1[n] = '*';  arr2[n] = m; }
       else { arr1[n] = arr2[n] = m; }
 
-      console.log({arr1,arr2});
+      //console.log({arr1,arr2});
 
     n++; } while( n < GOT.length); }
-    var data = {GOT:arr2, arr: {arr1, arr2}, page:routes.url(arr1), path:routes.url(routes.dir(state.replace('#',''))), port:routes.url(arr2), state, section};
-    data.section = document.querySelector('[data-port="'+data.path+'"]') ? document.querySelector('[data-port="'+data.path+'"]').closest('.section') : null;
-    //console.log({data}); 
+    var data = {GOT:arr2, arr: {arr1, arr2}, page:routes.url(arr1), port:routes.url(arr2), state, section};
+    data.section = document.querySelector('[data-page="'+data.page+'"]') ? document.querySelector('[data-page="'+data.page+'"]').closest('.article') : null;
     return data;
 }
 window.routes = {
