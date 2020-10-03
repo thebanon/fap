@@ -1,3 +1,7 @@
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background-color: #333; border-radius: 20px; border: 3px solid #111; }
+
 [data-before]:before { content: attr(data-before); }
 [data-after]:after { content: attr(data-after); }
 
@@ -95,7 +99,3 @@
     .stars > :nth-child(5n) { margin-right: 20px; }
     .stars > :last-child { margin-right: 20px; }
 }
-
-body::-webkit-scrollbar { width: 12px; }
-body::-webkit-scrollbar-track { background: #111; }
-body::-webkit-scrollbar-thumb { background-color: #333; border-radius: 20px; border: 3px solid #111; }
