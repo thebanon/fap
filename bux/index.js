@@ -24,7 +24,7 @@ window.func = {
       ajax('/json/freaks.json').then((j,json=JSON.parse(j)) => { 
         console.log(json);
       });
-      ajax('/json/videos.json').then((j,json=JSON.parse(j)) => { console.log(json);
+      ajax('/json/volume/1.json').then((j,json=JSON.parse(j)) => { console.log(json);
         var videos = json.videos;
         if(videos.length > 0) { 
           var i = 0, html = ``; do {
@@ -34,7 +34,7 @@ window.func = {
               html += `<section class="section-video"><picture><img src="`+row.thumbnail+`"></picture></section>`;
               html += `<footer class="footer-video"><div>`+row.title+`</div></footer>`;
             html += `</div>`;
-           i++; } while(i < videos.length);
+           i++; } while(i < 60 && i < videos.length);
            page.find('.section-video').innerHTML = html;
         }
       });
