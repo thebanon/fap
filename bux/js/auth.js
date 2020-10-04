@@ -11,16 +11,9 @@ window.auth = {
     },
     change: (user) => { //console.log({user});
         return new Promise((resolve, reject, url) => {
-            var goto = '/';
-            if(user) {
-                user.photoURL ? dom.avi.style.backgroundImage = 'url("' + user.photoURL + '")' : null;
-                goto = (document.body.dataset.page === '/my/account/' ? '/' : window.location.pathname)
-            } else {
-                byId('feed-alerts').innerHTML = "";
-                dom.avi.removeAttribute('style');
-                document.body.removeAttribute('data-uid');
-                goto = window.location.pathname+window.location.hash+window.location.search;
-            }
+            var goto = window.location.pathname+window.location.hash+window.location.search;
+            if(user) { goto = (document.body.dataset.page === '/my/account/' ? '/' : window.location.pathname); } 
+            else { document.body.removeAttribute('data-uid'); }
             resolve(goto);
         });
     },

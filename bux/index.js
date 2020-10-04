@@ -27,10 +27,7 @@ window.tion = {
   ialize: pg => { tion.ia++;
       if(tion.ia === Object.keys(func).length) { 
         firebase.auth().onAuthStateChanged(user => {
-        //auth.change(user).then(goto => { console.log({goto});
-          //goto = (user && document.body.dataset.ppp === '/my/account/') ? '/' : window.location.pathname;
-          window.location.pathname.router();
-        //});
+        auth.change(user).then(goto => { goto.router(); });
         });
       }
   }
