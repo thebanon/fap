@@ -75,8 +75,9 @@ function view(paths) {
       else if(root === 'volume') { 
         if(get.length > 1) {
           if(get.length > 2) { mvc.v.page.volume.video({paths}); }
-          else { }
+          else { mvc.v.page.volume.number({paths}); }
         }
+        else { mvc.v.page.volume.index({paths}); }
         resolve({paths});
       }
       else { resolve({paths}); }
