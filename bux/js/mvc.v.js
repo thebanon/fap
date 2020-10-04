@@ -59,18 +59,30 @@ window.mvc['v'] = {
                 var get = paths.GOT;
                 var section = paths.section;
                 var state = paths.state;
+                var index = parseInt(get[1])-1;
+                var id = parseInt(get[2])-1;
                 var volume = volumes[parseInt(get[1])-1];
-                var video = volume.videos[parseInt(get[2])-1];
+                var video;
+                if(volume) { 
+                    video = volume.videos[parseInt(get[2])-1];                    
+                    page(video);
+                }
+                else {
+                    ajax('/json/volume/'+parseInt(get[1])+'.json').then((v,volume=JSON.parse(v)) => {
+                        console.log({volume});
+                        volumes[index] = volume;
+                        video = volume.videos[id];
+                        page(video);
+                    });
+                }
                 console.log({paths,volume,video});
 
-                ajax('/html/www.volume.number.video.html').then(html => {
-
+                var page = video => ajax('/html/www.volume.number.video.html').then(html => {
                     if(section.innerHTML === "" || (section.innerHTML !== "" && section.dataset.port === state)) {
                         section.innerHTML = html;
                         section.find('.video-header').style.backgroundImage = "url("+video.thumbnail+")";
                         section.find('#video-iframe').src = "https://www.xvideos.com/embedframe/"+video.id;
                     }
-
                 });
 
             }
