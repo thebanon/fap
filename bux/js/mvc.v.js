@@ -55,6 +55,14 @@ window.mvc['v'] = {
 
             video: data => {
 
+                var page = video => ajax('/html/www.volume.number.video.html').then(html => {
+                    if(section.innerHTML === "" || (section.innerHTML !== "" && section.dataset.port === state)) {
+                        section.innerHTML = html;
+                        section.find('.video-header').style.backgroundImage = "url("+video.thumbnail+")";
+                        section.find('#video-iframe').src = "https://www.xvideos.com/embedframe/"+video.id;
+                    }
+                });
+                
                 var paths = data.paths;
                 var get = paths.GOT;
                 var section = paths.section;
@@ -76,14 +84,6 @@ window.mvc['v'] = {
                     });
                 }
                 console.log({paths,volume,video});
-
-                var page = video => ajax('/html/www.volume.number.video.html').then(html => {
-                    if(section.innerHTML === "" || (section.innerHTML !== "" && section.dataset.port === state)) {
-                        section.innerHTML = html;
-                        section.find('.video-header').style.backgroundImage = "url("+video.thumbnail+")";
-                        section.find('#video-iframe').src = "https://www.xvideos.com/embedframe/"+video.id;
-                    }
-                });
 
             }
 
