@@ -67,6 +67,7 @@ window.mvc['v'] = {
 
                     if(section.innerHTML === "" || (section.innerHTML !== "" && section.dataset.port === state)) {
                         section.innerHTML = html;
+                        section.find('.video-header').style.backgroundImage = "url("+video.thumbnail+")";
                         section.find('#video-iframe').src = "https://www.xvideos.com/embedframe/"+video.id;
                     }
 
