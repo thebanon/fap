@@ -8,16 +8,16 @@ parse_str($query_string, $query_array);
 $qa = $query_array;
 
 $request_method = $_SERVER['REQUEST_METHOD'];
-$redirect_url = $_SERVER['REQUEST_URI'];
+$request_uri = $_SERVER['REQUEST_URI'];
 $sitemap = [
     "/",
     "/home/"
 ];
 
 
-$_GET = $get = array_filter(explode('/',trim($redirect_url,'/')));
+$_GET = $get = array_filter(explode('/',trim($request_uri,'/')));
 $got =  count($_GET);
-$query = array_slice($_GET,2);
+$query = array_slice($_GET,3);
 $params = count($query);
 $endpoints = ['create', 'read', 'update', 'delete'];
 $host = $_SERVER['HTTP_HOST'];
@@ -55,13 +55,9 @@ if(count($arrhost) > 2) {
         if($host === $api) {
             #$data['SERVER']['HOST'] = $api;
             #$data['SERVER']['HOST_MODE'] = 'API';
-
             if(count($_GET) > 1) {
-                $data = [
-                    "dir" => __DIR__.'/../'.$_GET[0].'/'.$_GET[1].'/index.php'
-                ];
                 header('Content-Type: application/json');
-                include($data["dir"]);
+                include(__DIR__.'/../'.$_GET[0].'/'.$_GET[1].'/index.php');
                 count($data) > 0 ? print_r(json_encode($data, JSON_PRETTY_PRINT)) : null;
                 unset($data);
             } else {
@@ -69,7 +65,6 @@ if(count($arrhost) > 2) {
                 $data['error'] = ["code" => 404, "message" => "Unauthorized"];
                 die();
             }
-
         }
 
     }
