@@ -71,7 +71,14 @@ function view(paths) {
     
     if(root) {
         
-      if(root === 'video') { resolve({paths}); }
+      if(root === 'video') {
+        if(get.length > 1) {
+          if(get.length > 2) { mvc.v.page.volume.video({paths}); }
+          else { mvc.v.page.volume.number({paths}); }
+        }
+        else { mvc.v.page.volume.index({paths}); }
+        resolve({paths});
+      }
       else if(root === 'volume') { 
         if(get.length > 1) {
           if(get.length > 2) { mvc.v.page.volume.video({paths}); }
@@ -93,6 +100,7 @@ window.route = state => { //console.log({state});
     if(GOT.length > 0) { do { var m = GOT[n];
 
       if(m.includes('#') || (
+        (root === 'video' && GOT.length === 2 && n === 1) ||
         (root === 'volume' && GOT.length === 2 && n === 1) ||
         (root === 'volume' && GOT.length === 3 && n > 0 && n < 3)
       )) { arr1[n] = '*';  arr2[n] = m; }

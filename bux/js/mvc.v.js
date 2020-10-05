@@ -7,9 +7,7 @@ window.mvc['v'] = {
             ajax('/html/www.index.html').then(html => { //func.home(html,document.body.find('[data-port="/"]'))
 
               var page = byId('page-index');
-              page.innerHTML = html;
-
-              ajax('/json/volumes.json').then((j,json=JSON.parse(j)) => { });
+              page.innerHTML = html;              
 
               ajax('/json/stars.json').then((j,json=JSON.parse(j)) => {
                 var freaks = json;
@@ -19,10 +17,7 @@ window.mvc['v'] = {
                 page.find('.stars').innerHTML = html;
               });
 
-              var index = 0;
-              var volume = index+1;
-              ajax('/json/volume/'+volume+'.json').then((j,json=JSON.parse(j)) => {  
-                window.volumes[index] = json;
+              ajax('/json/www.index.json').then((j,json=JSON.parse(j)) => {  
                 var videos = json.videos;
                 var page = byId('page-index');
                 if(videos.length > 0) { 
@@ -30,7 +25,7 @@ window.mvc['v'] = {
                     var row = videos[i];
                     html += `<div class="media-video">`;
                       html += `<header class="header-video">`;
-                        html += `<section class="section-video" data-href="/volume/`+volume+`/`+(i+1)+`/"><picture><img src="`+row.thumbnail+`"></picture></section>`;
+                        html += `<section class="section-video" data-href="/video/`+row.id+`/"><picture><img src="`+row.thumbnail+`"></picture></section>`;
                       html += `</header>`;
                       html += `<footer class="footer-video">`;
                         var s = 0; do {

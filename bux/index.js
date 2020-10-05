@@ -20,7 +20,11 @@ window.tld = () => { return is.local() ? 'localhost' : 'com'; }
 window.volumes = [];
 
 window.func = {
-  home: () => mvc.v.page.index()
+  home: () => mvc.v.page.index(),
+  volumes: () => mvc.m.data.volumes({limit:3}).then(data => {
+    window.volumes = data;
+    tion.ialize(tion.ia);
+  })
 };
 window.tion = {
   ia: 0,
