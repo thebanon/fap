@@ -21,7 +21,7 @@ if($params > 0) {
         libxml_use_internal_errors(true);
         if(!empty($html)){
             $dom->loadHTML($html);
-            libxml_clear_errors();	
+            libxml_clear_errors();
             $xpath = new DOMXPath($dom);
             
             $url = $xpath->query("//meta[@property='og:url']");
