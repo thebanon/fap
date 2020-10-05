@@ -10,16 +10,18 @@ window.mvc['v'] = {
               page.innerHTML = html;              
 
               ajax('/json/stars.json').then((j,json=JSON.parse(j)) => {
-                var freaks = json;
+              });
+
+              ajax('/json/www.index.json').then((j,json=JSON.parse(j)) => {  
+
+
+                var freaks = query.shuffle.arr(json.freaks);
                 var html = ``; f = 0; 
                 do { html += `<picture><img src='/jpg/avatar/`+freaks[f]+`.jpg'></picture>`; f++; }
                 while(f < 10 && f < freaks.length);
                 page.find('.stars').innerHTML = html;
-              });
-
-              ajax('/json/www.index.json').then((j,json=JSON.parse(j)) => {  
-                var videos = json.videos;
-                var page = byId('page-index');
+              
+                var videos = query.shuffle.obj(json.videos);
                 if(videos.length > 0) { 
                   var i = 0, html = ``; do {
                     var row = videos[i];

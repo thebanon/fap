@@ -30,9 +30,7 @@ window.tion = {
   ia: 0,
   ialize: pg => { tion.ia++;
       if(tion.ia === Object.keys(func).length) { 
-        firebase.auth().onAuthStateChanged(user => {
-        auth.change(user).then(goto => { goto.router(); });
-        });
+        firebase.auth().onAuthStateChanged(user => auth.change(user).then(goto => { goto.router(); }));
       }
   }
 };
