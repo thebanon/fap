@@ -29,7 +29,7 @@ $request_uri = in_array($_SERVER['REQUEST_URI'],$sitemap) ? 'index.html' : $_SER
 $api = 'api.'.$domain.'.'.$tld;
 $beta = 'beta.'.$domain.'.'.$tld;
 
-$server = [
+$data["srv"] = $server = [
    'HTTP_HOST' => $host,
    'HOST_ARRAY' => $arrhost,
    'HOST_ARRAY_LENGTH' => $arrhostcount,
