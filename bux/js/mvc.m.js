@@ -11,8 +11,7 @@ window.mvc['m'] = {
                     console.log({json,limit}); 
                     j = 0; do {
                       ajax('/json/volume/'+(j+1)+'.json')
-                        .then((v,volume=JSON.parse(v)) => {   
-                            console.log(volume);                     
+                        .then((v,volume=JSON.parse(v)) => {
                             vols.push(volume);                
                             if(vols.length === limit) { resolve(vols); }
                         });

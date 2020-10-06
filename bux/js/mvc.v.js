@@ -1,17 +1,40 @@
-var a = ['','one ','two ','three ','four ', 'five ','six ','seven ','eight ','nine ','ten ','eleven ','twelve ','thirteen ','fourteen ','fifteen ','sixteen ','seventeen ','eighteen ','nineteen '];
-var b = ['', '', 'twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety'];
-function inWords (num) {
-    if ((num = num.toString()).length > 9) return 'overflow';
-    n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
-    if (!n) return; var str = '';
-    str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
-    str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
-    str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
-    str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
-    str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'only ' : '';
-    return str;
-}
+function toWords(num) {
+  var ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',
+              'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen',
+              'seventeen', 'eighteen', 'nineteen'];
+  var tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty',
+              'ninety'];
 
+  var numString = num.toString();
+
+  if (num < 0) throw new Error('Negative numbers are not supported.');
+
+  if (num === 0) return 'zero';
+
+  //the case of 1 - 20
+  if (num < 20) {
+    return ones[num];
+  }
+
+  if (numString.length === 2) {
+    return tens[numString[0]] + ' ' + ones[numString[1]];
+  }
+
+  //100 and more
+  if (numString.length == 3) {
+    if (numString[1] === '0' && numString[2] === '0')
+      return ones[numString[0]] + ' hundred';
+    else
+      return ones[numString[0]] + ' hundred and ' + convert(+(numString[1] + numString[2]));
+  }
+
+  if (numString.length === 4) {
+    var end = +(numString[1] + numString[2] + numString[3]);
+    if (end === 0) return ones[numString[0]] + ' thousand';
+    if (end < 100) return ones[numString[0]] + ' thousand and ' + convert(end);
+    return ones[numString[0]] + ' thousand ' + convert(end);
+  }
+}
 window.mvc['v'] = {
 
     page: {
@@ -33,8 +56,8 @@ window.mvc['v'] = {
                 page.find('.stars').innerHTML = html;
 
                 var html = ``, volumes = json.volumes; f = 0;
-                do { console.log({volumes}); html += `<div data-before="`+f+`" data-after="`+volumes[f]+`"></div>`; f++; }
-                while(f < volumes.length);
+                do { html += `<div><a data-before="volume `+toWords(parseInt(Object.keys(volumes)[f])+1)+`" data-after="`+volumes[f]+`" data-href="/volume/`+Object.keys(volumes)[f]+`/"></a></div>`; f++; }
+                while(f < page.find('.volumes').children.length);
                 page.find('.volumes').innerHTML = html;
               
                 var videos = index.videos; console.log({videos});

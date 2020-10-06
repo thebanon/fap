@@ -33,10 +33,16 @@ body::-webkit-scrollbar-thumb { background-color: #333; border-radius: 20px; bor
 .stars > :last-child { margin-right: 0; }
 .stars picture img { width: 100%; height: 100%; position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
 
-.volumes { white-space: nowrap; }
-.volumes > * {width: calc((100% - 30px)/4);padding-top: calc((100% - 30px)/3);height: 0;background:#bbb;display: inline-block;vertical-align: top;overflow: hidden;position: relative;margin: 10px 10px 0 0;}
+.volumes > * {width: calc((100% - 30px)/4);padding-top: calc((100% - 30px)/3);height: 0;background: #111;display: inline-block;vertical-align: top;overflow: hidden;position: relative;margin: 10px 10px 0 0;}
 .volumes > :last-child { margin-right: 0; }
-
+.volumes > * > a {/* width: 100%; */height: auto;position: absolute;bottom: 0;left: 0;padding: 5px;}
+.volumes > * > a:before, .volumes > * > a:after { text-align: left; display: block; }
+.volumes > * > a:before { font-size: 13px; text-transform: capitalize; }
+.volumes > * > a:after { font-size: 20px; }
+@media screen and (max-width: 960px) {
+    .volumes > * {width: calc((100% - 10px)/2);padding-top: calc((100% - 10px)/1.125);}
+    .volumes > *:nth-child(2n) { margin-right: 0; }
+}
 .tags {/* display: none; */}
 
 .section-video .media-video {display: inline-block;vertical-align: top;width: calc((100% - 50px)/6);margin-right: 10px;margin-top: 10px;}
