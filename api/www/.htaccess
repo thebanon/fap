@@ -1,13 +1,4 @@
-<FilesMatch "\.(ttf|otf|eot|woff|woff2)$">
-    <IfModule mod_headers.c>
-        SetEnvIf Origin "http(s)?://(www\.)?(fapbux.localhost|admin.fapbux.localhost|fapbux.com|admin.fapbux.com|fapco.in)$" AccessControlAllowOrigin=$0
-        Header add Access-Control-Allow-Origin %{AccessControlAllowOrigin}e env=AccessControlAllowOrigin
-        Header add Access-Control-Allow-Methods "GET, POST, OPTIONS, PUT, DELETE"
-        Header add Access-Control-Allow-Headers "origin, x-requested-with, content-type"
-        Header merge Vary Origin
-    </IfModule>
-</FilesMatch>
-DirectoryIndex index.html index.php index.json
+DirectoryIndex index.php index.json index.html
 RewriteEngine On
 RewriteCond %{HTTPS} on
 RewriteCond %{REQUEST_URI} /+[^\.]+$
