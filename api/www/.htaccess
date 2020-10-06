@@ -1,6 +1,6 @@
 <FilesMatch "\.(ttf|otf|eot|woff|woff2)$">
     <IfModule mod_headers.c>
-        SetEnvIf Origin "http(s)?://(www\.)?(mallzones.localhost|admin.mallzones.localhost|apple.mallzones.localhost|mallzones.com|apple.mallzones.com|mallzones.store|apple.mallzones.store|spriii.com|apple.spriii.com|spriii.store|apple.spriii.store)$" AccessControlAllowOrigin=$0
+        SetEnvIf Origin "http(s)?://(www\.)?(fapbux.localhost|admin.fapbux.localhost|fapbux.com|admin.fapbux.com|fapco.in)$" AccessControlAllowOrigin=$0
         Header add Access-Control-Allow-Origin %{AccessControlAllowOrigin}e env=AccessControlAllowOrigin
         Header add Access-Control-Allow-Methods "GET, POST, OPTIONS, PUT, DELETE"
         Header add Access-Control-Allow-Headers "origin, x-requested-with, content-type"
