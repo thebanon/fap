@@ -1,3 +1,17 @@
+var a = ['','one ','two ','three ','four ', 'five ','six ','seven ','eight ','nine ','ten ','eleven ','twelve ','thirteen ','fourteen ','fifteen ','sixteen ','seventeen ','eighteen ','nineteen '];
+var b = ['', '', 'twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety'];
+function inWords (num) {
+    if ((num = num.toString()).length > 9) return 'overflow';
+    n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+    if (!n) return; var str = '';
+    str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
+    str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
+    str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
+    str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
+    str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'only ' : '';
+    return str;
+}
+
 window.mvc['v'] = {
 
     page: {
@@ -7,27 +21,29 @@ window.mvc['v'] = {
             ajax('/html/www.index.html').then(html => { //func.home(html,document.body.find('[data-port="/"]'))
 
               var page = byId('page-index');
-              page.innerHTML = html;              
+              page.innerHTML = html;
 
-              ajax('/json/stars.json').then((j,json=JSON.parse(j)) => {
-              });
-
-              ajax('/json/www.index.json').then((j,json=JSON.parse(j)) => {  
-
+              ajax('/json/www.index.json').then((j,json=JSON.parse(j)) => {                
+                var index = window.pages["index"] = json;
 
                 var freaks = query.shuffle.arr(json.freaks);
                 var html = ``; f = 0; 
                 do { html += `<picture><img src='/jpg/avatar/`+freaks[f]+`.jpg'></picture>`; f++; }
                 while(f < 10 && f < freaks.length);
                 page.find('.stars').innerHTML = html;
+
+                var html = ``, volumes = json.volumes; f = 0;
+                do { console.log({volumes}); html += `<div data-before="`+f+`" data-after="`+volumes[f]+`"></div>`; f++; }
+                while(f < volumes.length);
+                page.find('.volumes').innerHTML = html;
               
-                var videos = query.shuffle.obj(json.videos);
-                if(videos.length > 0) { 
+                var videos = index.videos; console.log({videos});
+                if(Object.keys(videos).length > 0) { 
                   var i = 0, html = ``; do {
-                    var row = videos[i];
+                    var row = Object.values(videos)[i];
                     html += `<div class="media-video">`;
                       html += `<header class="header-video">`;
-                        html += `<section class="section-video" data-href="/video/`+row.id+`/"><picture><img src="`+row.thumbnail+`"></picture></section>`;
+                        html += `<section class="section-video" data-href="/video/`+Object.keys(videos)[i]+`/"><picture><img src="`+row.thumbnail+`"></picture></section>`;
                       html += `</header>`;
                       html += `<footer class="footer-video">`;
                         var s = 0; do {
@@ -36,7 +52,7 @@ window.mvc['v'] = {
                         html += `<div>`+row.title+`</div>`;
                       html += `</footer>`;
                     html += `</div>`;
-                   i++; } while(i < 60 && i < videos.length);
+                   i++; } while(i < 60 && i < Object.keys(videos).length);
                    page.find('.section-video').innerHTML = html;
                 }
                 tion.ialize(tion.ia);
@@ -46,6 +62,26 @@ window.mvc['v'] = {
               //}).catch(() => tion.ialize(ion.ia));
             });
 
+        },
+
+        video: {        
+            
+            id: data => {
+
+                var id = data.paths.GOT[1];
+                var section = data.paths.section;
+                var state = data.paths.state;
+                var page = video => ajax('/html/www.volume.number.video.html').then(html => {
+                    if(section.innerHTML === "" || (section.innerHTML !== "" && section.dataset.port === state)) {
+                        section.innerHTML = html;
+                        section.find('.video-header').style.backgroundImage = "url("+video.thumbnail+")";
+                        section.find('#video-iframe').src = "https://www.xvideos.com/embedframe/"+id;
+                    }
+                }); 
+                ajax('/json/video/'+id+'.json').then((v,video=JSON.parse(v)) => page(video));
+                    
+            }
+                
         },
 
         volume: {

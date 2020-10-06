@@ -1,15 +1,14 @@
 window.query = {
   shuffle: {
     obj: (array) => {
-      var currentIndex = array.length, temporaryValue, randomIndex;
-      while (0 !== currentIndex) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-      }
-      return array;
+numbers = Object.keys(array)
+    .map((key) => ({key, value: array[key]}))
+    .sort((a, b) => b.key.localeCompare(a.key))
+    .reduce((acc, e) => {
+      acc[e.key] = e.value;
+      return acc;
+    }, {});
+console.log(JSON.stringify(numbers));
     },
     arr: (a) => {
       for (let i = a.length - 1; i > 0; i--) {

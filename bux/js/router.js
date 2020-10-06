@@ -72,11 +72,8 @@ function view(paths) {
     if(root) {
         
       if(root === 'video') {
-        if(get.length > 1) {
-          if(get.length > 2) { mvc.v.page.volume.video({paths}); }
-          else { mvc.v.page.volume.number({paths}); }
-        }
-        else { mvc.v.page.volume.index({paths}); }
+        if(get.length > 1) { mvc.v.page.video.id({paths}); }
+        else { mvc.v.page.video.index({paths}); }
         resolve({paths});
       }
       else if(root === 'volume') { 

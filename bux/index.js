@@ -20,11 +20,11 @@ window.tld = () => { return is.local() ? 'localhost' : 'com'; }
 window.volumes = [];
 
 window.func = {
-  home: () => mvc.v.page.index(),
-  volumes: () => mvc.m.data.volumes({limit:3}).then(data => {
+  volumes: () => mvc.m.data.volumes({limit:4}).then(data => {
     window.volumes = data;
     tion.ialize(tion.ia);
-  })
+  }),
+  home: () => mvc.v.page.index(),
 };
 window.tion = {
   ia: 0,
@@ -49,6 +49,8 @@ function init(url) {
       "header": byId("body-header"),
       "main": byId("main")
     };
+    
+    window.pages = {};
     
     var keys = Object.keys(func);
     var p = 0; do { func[keys[p]](tion.ia); p++; } while(p < keys.length);
