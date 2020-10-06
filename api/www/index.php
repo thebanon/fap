@@ -69,6 +69,8 @@ if(count($arrhost) > 2) {
 
     }
 
+} else {
+    print_r(json_encode($data, JSON_PRETTY_PRINT));
 }
 
 unset($data);
