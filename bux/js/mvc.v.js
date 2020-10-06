@@ -56,7 +56,7 @@ window.mvc['v'] = {
                 page.find('.stars').innerHTML = html;
 
                 var html = ``, volumes = json.volumes; f = 0;
-                do { html += `<div><a data-before="volume `+toWords(parseInt(Object.keys(volumes)[f])+1)+`" data-after="`+volumes[f]+`" data-href="/volume/`+Object.keys(volumes)[f]+`/"></a></div>`; f++; }
+                do { html += `<div data-href="/volume/`+Object.keys(volumes)[f]+`/"><a data-before="volume `+toWords(parseInt(Object.keys(volumes)[f])+1)+`" data-after="`+volumes[f]+`"></a></div>`; f++; }
                 while(f < page.find('.volumes').children.length);
                 page.find('.volumes').innerHTML = html;
               
@@ -127,6 +127,39 @@ window.mvc['v'] = {
                 var id = parseInt(get[2])-1;
                 var volume = volumes[parseInt(get[1])-1];
                 var video;
+                if(volume) { 
+                    video = volume.videos[parseInt(get[2])-1];                    
+                    page(video);
+                }
+                else {
+                    ajax('/json/volume/'+parseInt(get[1])+'.json').then((v,volume=JSON.parse(v)) => {
+                        console.log({volume});
+                        volumes[index] = volume;
+                        video = volume.videos[id];
+                        page(video);
+                    });
+                }
+                console.log({paths,volume,video});
+
+            },
+
+            number: data => {
+
+                var page = video => ajax('/html/www.volume.number.html').then(html => {
+                    if(section.innerHTML === "" || (section.innerHTML !== "" && section.dataset.port === state)) {
+                        section.innerHTML = html;
+                    }
+                });
+                
+                var paths = data.paths;
+                var get = paths.GOT;
+                var section = paths.section;
+                var state = paths.state;
+                var index = parseInt(get[1])-1;
+                var id = parseInt(get[2])-1;
+                var volume = volumes[parseInt(get[1])-1];
+                var video = '';
+                
                 if(volume) { 
                     video = volume.videos[parseInt(get[2])-1];                    
                     page(video);
