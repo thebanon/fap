@@ -37,7 +37,7 @@ $data["srv"] = $server = [
    'HOST_TLD' => $tld,
    'REQUEST_URI' => $request_uri
 ];
-
+print_r(json_encode($data, JSON_PRETTY_PRINT));
 if($request_method == "POST") { $_POST = $post = json_decode(file_get_contents('php://input'),true); }
 
 if(count($arrhost) > 2) {
@@ -74,37 +74,4 @@ if(count($arrhost) > 2) {
 }
 
 unset($data);
-
-function get_mime_type($extension) {
-        $mime_types = array(
-                "pdf"=>"application/pdf"
-                ,"exe"=>"application/octet-stream"
-                ,"zip"=>"application/zip"
-                ,"docx"=>"application/msword"
-                ,"doc"=>"application/msword"
-                ,"xls"=>"application/vnd.ms-excel"
-                ,"ppt"=>"application/vnd.ms-powerpoint"
-                ,"gif"=>"image/gif"
-                ,"png"=>"image/png"
-                ,"jpeg"=>"image/jpg"
-                ,"jpg"=>"image/jpg"
-                ,"mp3"=>"audio/mpeg"
-                ,"svg"=>"image/svg+xml"
-                ,"wav"=>"audio/x-wav"
-                ,"mpeg"=>"video/mpeg"
-                ,"mpg"=>"video/mpeg"
-                ,"mpe"=>"video/mpeg"
-                ,"mov"=>"video/quicktime"
-                ,"avi"=>"video/x-msvideo"
-                ,"3gp"=>"video/3gpp"
-                ,"css"=>"text/css"
-                ,"jsc"=>"application/javascript"
-                ,"js"=>"application/javascript"
-                ,"json"=>"application/json"
-                ,"php"=>"text/html"
-                ,"htm"=>"text/html"
-                ,"html"=>"text/html"
-        );
-        return $mime_types[$extension] !== false ? $mime_types[$extension] : $mime_types['html'];
-}
 ?>
