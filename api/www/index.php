@@ -26,18 +26,20 @@ $arrhostcount = count($arrhost);
 $domain = $arrhost[count($arrhost)-2];
 $tld = $arrhost[count($arrhost)-1];
 $request_uri = in_array($_SERVER['REQUEST_URI'],$sitemap) ? 'index.html' : $_SERVER['REQUEST_URI'];
-$api = 'api.'.$domain.'.'.$tld;
+$api = ['api.'.$domain.'.'.$tld, 'api-fapbux.herokuapp.com'];
 $beta = 'beta.'.$domain.'.'.$tld;
 
 $data["srv"] = $server = [
+   'GET' => $_GET,
    'HTTP_HOST' => $host,
+   'HOST_API' => $api,
    'HOST_ARRAY' => $arrhost,
+   'HOST_COUNT' => count($arrhost),
    'HOST_ARRAY_LENGTH' => $arrhostcount,
    'HOST_DOMAIN' => $domain,
    'HOST_TLD' => $tld,
    'REQUEST_URI' => $request_uri
 ];
-print_r(json_encode($data, JSON_PRETTY_PRINT));
 if($request_method == "POST") { $_POST = $post = json_decode(file_get_contents('php://input'),true); }
 
 if(count($arrhost) > 2) {
@@ -50,9 +52,7 @@ if(count($arrhost) > 2) {
 
     } else {
         
-        $mimetype = 'text/html';
-
-        if($host === $api) {
+        if(in_array($host,$api)) {
             #$data['SERVER']['HOST'] = $api;
             #$data['SERVER']['HOST_MODE'] = 'API';
             if(count($_GET) > 1) {
@@ -63,6 +63,7 @@ if(count($arrhost) > 2) {
             } else {
                 http_response_code(404);
                 $data['error'] = ["code" => 404, "message" => "Unauthorized"];
+                print_r(json_encode($data, JSON_PRETTY_PRINT));
                 die();
             }
         }
@@ -70,7 +71,9 @@ if(count($arrhost) > 2) {
     }
 
 } else {
+    http_response_code(404);
     print_r(json_encode($data, JSON_PRETTY_PRINT));
+    die();
 }
 
 unset($data);
