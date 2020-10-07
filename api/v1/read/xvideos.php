@@ -45,15 +45,24 @@ if($params > 0) {
             $dom->loadHTML($html);
             libxml_clear_errors();
             $xpath = new DOMXPath($dom);
+
+            $data["freaks"] = $freaks = explode('+',$query[1]);
             
             $url = $xpath->query("//meta[@property='og:url']");
-            $data["response"]["id"] = (int)explode('/',explode('xvideos.com/video',$url->item(0)->getAttribute('content'))[1])[0];
+            $data["id"] = $id = (int)explode('/',explode('xvideos.com/video',$url->item(0)->getAttribute('content'))[1])[0];
+            $data["video"] = [];
+
+            $data["video"]["freaks"] = $freaks;
 
             $thumbnail = $xpath->query("//meta[@property='og:image']");
-            $data["response"]["thumbnail"] = $thumbnail->item(0)->getAttribute('content');
+            $data["video"]["thumbnail"] = $thumbnail->item(0)->getAttribute('content');
             
             $title = $xpath->query("//meta[@property='og:title']");
-            $data["response"]["title"] = $title->item(0)->getAttribute('content');
+            $data["video"]["title"] = $title->item(0)->getAttribute('content');
+
+            $file = fopen(__DIR__."/../../../bux/json/video/".$id.".json", "w") or die("Unable to open file!");
+            fwrite($file, json_encode($data["video"],JSON_PRETTY_PRINT));
+            fclose($file);
         }     
     }
 } else {
