@@ -46,19 +46,21 @@ if($params > 0) {
             libxml_clear_errors();
             $xpath = new DOMXPath($dom);
 
-            $data["freaks"] = $freaks = explode('+',$query[1]);
+            $data["freaks"] = $freaks = explode('+',$query[1]);            
+            $data["url"] = $url = $xpath->query("//meta[@property='og:url']");
+            $data["image"] = $image = $xpath->query("//meta[@property='og:image']");         
+            $data["titles"] = $title = $xpath->query("//meta[@property='og:title']");
+            $id = (int)explode('/',explode('xvideos.com/video',$url->item(0)->getAttribute('content'))[1])[0];
             
-            $url = $xpath->query("//meta[@property='og:url']");
-            $data["id"] = $id = (int)explode('/',explode('xvideos.com/video',$url->item(0)->getAttribute('content'))[1])[0];
             $data["video"] = [];
-
             $data["video"]["freaks"] = $freaks;
-
-            $thumbnail = $xpath->query("//meta[@property='og:image']");
-            $data["video"]["thumbnail"] = $thumbnail->item(0)->getAttribute('content');
-            
-            $title = $xpath->query("//meta[@property='og:title']");
+            $data["video"]["thumbnail"] = $image->item(0)->getAttribute('content');
             $data["video"]["title"] = $title->item(0)->getAttribute('content');
+
+            $data[$id] = [];
+            $data[$id]["freaks"] = $freaks;
+            $data[$id]["thumbnail"] = $image->item(0)->getAttribute('content');
+            $data[$id]["title"] = $title->item(0)->getAttribute('content');
 
             $file = fopen(__DIR__."/../../../bux/json/video/".$id.".json", "w") or die("Unable to open file!");
             fwrite($file, json_encode($data["video"],JSON_PRETTY_PRINT));
