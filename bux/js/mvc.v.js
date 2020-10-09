@@ -69,7 +69,7 @@ window.mvc['v'] = {
                       html += `<header class="header-video">`;
                         html += `<section class="section-video" data-href="/video/`+Object.keys(videos)[i]+`/"><picture><img src="`+row.thumbnail+`"></picture></section>`;
                       html += `</header>`;
-                      html += `<footer class="footer-video" onclick="mvc.c.crud.read(row,id)">`;
+                      html += `<footer class="footer-video" onclick="mvc.c.crud.read.video('`+row.stars.join('+').replace('%20','_').replace(' ','_')+`',`+id+`)">`;
                         var s = 0; do {
                           html += `<div class="freak"><a></a><a>`+row.stars[s].replace('_',' ').replace('-',' ')+`</a></div>`;
                         s++; } while(s < row.stars.length)
