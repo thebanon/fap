@@ -64,11 +64,12 @@ window.mvc['v'] = {
                 if(Object.keys(videos).length > 0) { 
                   var i = 0, html = ``; do {
                     var row = Object.values(videos)[i];
+                    var id = Object.keys(videos)[i];
                     html += `<div class="media-video">`;
                       html += `<header class="header-video">`;
                         html += `<section class="section-video" data-href="/video/`+Object.keys(videos)[i]+`/"><picture><img src="`+row.thumbnail+`"></picture></section>`;
                       html += `</header>`;
-                      html += `<footer class="footer-video">`;
+                      html += `<footer class="footer-video" onclick="mvc.c.crud.read(row,id)">`;
                         var s = 0; do {
                           html += `<div class="freak"><a></a><a>`+row.stars[s].replace('_',' ').replace('-',' ')+`</a></div>`;
                         s++; } while(s < row.stars.length)
