@@ -54,17 +54,24 @@ if($params > 0) {
             
             $data["video"] = [];
             $data["video"]["freaks"] = $freaks;
-            $data["video"]["thumbnail"] = $image->item(0)->getAttribute('content');
+            $data["video"]["thumbnail"] = str_replace("http:","https:",$image->item(0)->getAttribute('content'));
             $data["video"]["title"] = $title->item(0)->getAttribute('content');
 
-            $data[$id] = [];
-            $data[$id]["freaks"] = $freaks;
-            $data[$id]["thumbnail"] = $image->item(0)->getAttribute('content');
-            $data[$id]["title"] = $title->item(0)->getAttribute('content');
+            $data[$id] = $data["video"];
 
             $file = fopen(__DIR__."/../../../bux/json/video/".$id.".json", "w") or die("Unable to open file!");
             fwrite($file, json_encode($data["video"],JSON_PRETTY_PRINT));
             fclose($file);
+
+            $data["DIR"] = $dir = __DIR__."/../../../bux/json";
+            $data["glob"] = $glob = array_slice(scandir($dir.'/video'),2);
+            $arr = [];
+            foreach($glob as $file) {
+                $data["rows"][str_replace('.json','',$file)] = json_decode(str_replace('http:','https:',file_get_contents($dir.'/video/'.$file)));
+            }
+            $data["contents"] = $contents = json_encode($data["rows"],JSON_PRETTY_PRINT);
+            file_put_contents($dir.'/videos.json', $contents);
+
         }     
     }
 } else {

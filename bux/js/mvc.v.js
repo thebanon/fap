@@ -59,26 +59,6 @@ window.mvc['v'] = {
                 do { html += `<div data-href="/volume/`+Object.keys(volumes)[f]+`/"><a data-before="volume `+toWords(parseInt(Object.keys(volumes)[f])+1)+`" data-after="`+volumes[f]+`"></a></div>`; f++; }
                 while(f < page.find('.volumes').children.length);
                 page.find('.volumes').innerHTML = html;
-              
-                var videos = index.videos; console.log({videos});
-                if(Object.keys(videos).length > 0) { 
-                  var i = 0, html = ``; do {
-                    var row = Object.values(videos)[i];
-                    var id = Object.keys(videos)[i];
-                    html += `<div class="media-video">`;
-                      html += `<header class="header-video">`;
-                        html += `<section class="section-video" data-href="/video/`+Object.keys(videos)[i]+`/"><picture><img src="`+row.thumbnail+`"></picture></section>`;
-                      html += `</header>`;
-                      html += `<footer class="footer-video" onclick="mvc.c.crud.read.video('`+row.freaks.join('+').replace('%20','_').replace(' ','_')+`',`+id+`)">`;
-                        var s = 0; do {
-                          html += `<div class="freak"><a></a><a>`+row.freaks[s].replace('_',' ').replace('-',' ')+`</a></div>`;
-                        s++; } while(s < row.freaks.length)
-                        html += `<div>`+row.title+`</div>`;
-                      html += `</footer>`;
-                    html += `</div>`;
-                   i++; } while(i < 60 && i < Object.keys(videos).length);
-                   page.find('.section-video').innerHTML = html;
-                }
                 tion.ialize(tion.ia);
               });    
               //ajax(api.endpoint()+'/v1/read/blocks',{data:mvc.m.block(page.find('feed')),dataType:"POST"}).then((j,json=JSON.parse(j)) => {

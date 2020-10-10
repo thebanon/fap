@@ -7,9 +7,10 @@ if($params > 0) {
         $data["glob"] = $glob = array_slice(scandir($dir.'/video'),2);
         $arr = [];
         foreach($glob as $file) {
-            $data["rows"][str_replace('.json','',$file)] = json_decode(file_get_contents($dir.'/video/'.$file));
+            $data["rows"][str_replace('.json','',$file)] = json_decode(str_replace('http:','https:',file_get_contents($dir.'/video/'.$file)));
         }
-        file_put_contents($dir.'/videos.json', json_encode($data["rows"],JSON_PRETTY_PRINT));
+        $data["contents"] = $contents = json_encode($data["rows"],JSON_PRETTY_PRINT);
+        file_put_contents($dir.'/videos.json', $contents);
     }
 } else {
     http_response_code(404);
