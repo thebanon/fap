@@ -1,5 +1,5 @@
 <?php
-$data['paramsquery'] = $query; 
+$data['params'] = $params; 
 $data['query'] = $query; 
 if($params > 0) {  
     if($params > 1) {
