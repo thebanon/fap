@@ -71,8 +71,8 @@ window.mvc['v'] = {
                       html += `</header>`;
                       html += `<footer class="footer-video" onclick="mvc.c.crud.read.video('`+row.stars.join('+').replace('%20','_').replace(' ','_')+`',`+id+`)">`;
                         var s = 0; do {
-                          html += `<div class="freak"><a></a><a>`+row.stars[s].replace('_',' ').replace('-',' ')+`</a></div>`;
-                        s++; } while(s < row.stars.length)
+                          html += `<div class="freak"><a></a><a>`+row.freaks[s].replace('_',' ').replace('-',' ')+`</a></div>`;
+                        s++; } while(s < row.freaks.length)
                         html += `<div>`+row.title+`</div>`;
                       html += `</footer>`;
                     html += `</div>`;
