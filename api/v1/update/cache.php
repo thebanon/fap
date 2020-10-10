@@ -1,8 +1,9 @@
 <?php
-if($params > 0) {
-    //$data['query'] = $query;   
-    if($params > 1 && $query[0] == "freak") {
-        if($params > 1 && $query[0] == "id") {
+$data['paramsquery'] = $query; 
+$data['query'] = $query; 
+if($params > 0) {  
+    if($params > 1) {
+        if($query[0] == "id") {
         }
     }
 } else {
