@@ -46,6 +46,27 @@ window.mvc['v'] = {
               var page = byId('page-index');
               page.innerHTML = html;
 
+              ajax('/json/videos.json').then((j,videos=JSON.parse(j)) => { console.log({videos});
+                if(Object.keys(videos).length > 0) { 
+                  var i = 0, html = ``; do {
+                    var row = Object.values(videos)[i];
+                    var id = Object.keys(videos)[i];
+                    html += `<div class="media-video">`;
+                      html += `<header class="header-video">`;
+                        html += `<section class="section-video" data-href="/video/`+Object.keys(videos)[i]+`/"><picture><img src="`+row.thumbnail+`"></picture></section>`;
+                      html += `</header>`;
+                      html += `<footer class="footer-video" onclick="mvc.c.crud.read.video('`+row.freaks.join('+').replace('%20','_').replace(' ','_')+`',`+id+`)">`;
+                        var s = 0; do {
+                          html += `<div class="freak"><a></a><a>`+row.freaks[s].replace('_',' ').replace('-',' ')+`</a></div>`;
+                        s++; } while(s < row.freaks.length)
+                        html += `<div>`+row.title+`</div>`;
+                      html += `</footer>`;
+                    html += `</div>`;
+                   i++; } while(i < 60 && i < Object.keys(videos).length);
+                   byId('page-index').find('.section-video').innerHTML = html;
+                }
+              });
+
               ajax('/json/www.index.json').then((j,json=JSON.parse(j)) => {                
                 var index = window.pages["index"] = json;
 
