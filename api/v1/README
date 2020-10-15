@@ -1,0 +1,6 @@
+/v1/create/xvideos/video/:freaks/:url
+
+/v1/update/cache/freaks
+/v1/update/cache/videos
+
+/v1/delete/video/:ids
