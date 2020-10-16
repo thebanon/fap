@@ -46,23 +46,24 @@ window.mvc['v'] = {
               var page = byId('page-index');
               page.innerHTML = html;
 
-              ajax('/json/videos.json').then((j,videos=JSON.parse(j)) => { console.log({videos});
-                if(Object.keys(videos).length > 0) { 
+              ajax('/json/videos.json').then((j) => {
+                var videos = query.shuffle.arr(Object.values(JSON.parse(j)));  console.log({videos});
+                if(videos.length > 0) { 
                   var i = 0, html = ``; do {
-                    var row = Object.values(videos)[i];
-                    var id = Object.keys(videos)[i];
+                    var row = videos[i];
+                    var id = row.id; console.log({row});
                     html += `<div class="media-video">`;
                       html += `<header class="header-video">`;
-                        html += `<section class="section-video" data-href="/video/`+Object.keys(videos)[i]+`/"><picture><img src="`+row.thumbnail+`"></picture></section>`;
+                        html += `<section class="section-video" data-href="/video/`+row.id+`/"><picture><img src="`+row.thumbnail+`"></picture></section>`;
                       html += `</header>`;
-                      html += `<footer class="footer-video" onclick="mvc.c.crud.read.video('`+row.freaks.join('+').replace('%20','_').replace(' ','_')+`',`+id+`)">`;
+                      html += `<footer class="footer-video" onclick="mvc.c.crud.read.video('`+row.freaks.join('+').replace('%20','_').replace(' ','_')+`',`+row.id+`)">`;
                         var s = 0; do {
                           html += `<div class="freak"><a></a><a>`+row.freaks[s].replace('_',' ').replace('-',' ')+`</a></div>`;
                         s++; } while(s < row.freaks.length)
                         html += `<div>`+row.title+`</div>`;
                       html += `</footer>`;
                     html += `</div>`;
-                   i++; } while(i < 60 && i < Object.keys(videos).length);
+                   i++; } while(i < 60 && i < videos.length);
                    byId('page-index').find('.section-video').innerHTML = html;
                 }
               });
