@@ -26,7 +26,9 @@ if($params > 0) {
         $data["glob"] = $glob = array_slice(scandir($dir.'/video'),2);
         $arr = [];
         foreach($glob as $file) {
-            $data["rows"][str_replace('.json','',$file)] = json_decode(str_replace('http:','https:',file_get_contents($dir.'/video/'.$file)));
+            $id = (int)str_replace('.json','',$file);
+            $data["rows"][$id] = json_decode(str_replace('http:','https:',file_get_contents($dir.'/video/'.$file)),true);
+            $data["rows"][$id]["id"] = $id;
         }
         $data["contents"] = $contents = json_encode($data["rows"],JSON_PRETTY_PRINT);
         file_put_contents($dir.'/videos.json', $contents);
