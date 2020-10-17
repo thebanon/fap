@@ -50,7 +50,7 @@ window.mvc['v'] = {
                 var index = window.pages["index"] = json;
                 var freaks = query.shuffle.arr(json.freaks);
                 var html = ``; f = 0; 
-                do { html += `<picture><img src='/jpg/freak/`+freaks[f]+`.jpg'></picture>`; f++; }
+                do { html += `<picture><img src='/jpg/freak/`+freaks[f].replace(/'/g, "%27")+`.jpg'></picture>`; f++; }
                 while(f < 10 && f < freaks.length);
                 page.find('.stars').innerHTML = html;
                 tion.ialize(tion.ia);
@@ -64,7 +64,7 @@ window.mvc['v'] = {
                     var frks = query.shuffle.arr(Object.values(volumes)[f].freaks);
                     var ff = 0; do {
                       console.log({frks},frks[ff],ff);
-                      html += `<div style="background-image:url(/jpg/model/`+frks[ff]+`.jpg)"></div>`;
+                      html += `<div style="background-image:url(/jpg/model/`+frks[ff].replace(/'/g, "%27")+`.jpg)"></div>`;
                     ff++; } while(ff < 3);
                     html += `</section>`;
                     html += `<a data-before="volume `+toWords(parseInt(Object.keys(Object.keys(volumes)[f])[f])+1)+`" data-after="`+Object.keys(volumes)[f]+`"></a>`;
