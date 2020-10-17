@@ -80,12 +80,12 @@ window.mvc['v'] = {
                 if(videos.length > 0) { 
                   var i = 0, html = ``; do {
                     var row = videos[i];
-                    var id = row.id; //console.log({row});
+                    var id = row.id; console.log({row});
                     html += `<div class="media-video">`;
                       html += `<header class="header-video">`;
                         html += `<section class="section-video" data-href="/video/`+row.id+`/"><picture><img src="`+row.thumbnail+`"></picture></section>`;
                       html += `</header>`;
-                      html += `<footer class="footer-video" onclick="mvc.c.crud.read.video('`+row.freaks.join('+').replace('%20','_').replace(' ','_')+`',`+row.id+`)">`;
+                      html += `<footer class="footer-video">`;
                         var s = 0; do {
                           html += `<div class="freak"><a></a><a>`+row.freaks[s].replace('_',' ').replace('-',' ')+`</a></div>`;
                         s++; } while(s < row.freaks.length)
