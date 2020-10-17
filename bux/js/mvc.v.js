@@ -51,7 +51,7 @@ window.mvc['v'] = {
                 if(videos.length > 0) { 
                   var i = 0, html = ``; do {
                     var row = videos[i];
-                    var id = row.id; console.log({row});
+                    var id = row.id; //console.log({row});
                     html += `<div class="media-video">`;
                       html += `<header class="header-video">`;
                         html += `<section class="section-video" data-href="/video/`+row.id+`/"><picture><img src="`+row.thumbnail+`"></picture></section>`;
@@ -97,7 +97,7 @@ window.mvc['v'] = {
                 var id = data.paths.GOT[1];
                 var section = data.paths.section;
                 var state = data.paths.state;
-                var page = video => ajax('/html/www.volume.number.video.html').then(html => {
+                var page = video => ajax('/html/www.video.id.html').then(html => {
                     if(section.innerHTML === "" || (section.innerHTML !== "" && section.dataset.port === state)) {
                         section.innerHTML = html;
                         section.find('.video-header').style.backgroundImage = "url("+video.thumbnail+")";

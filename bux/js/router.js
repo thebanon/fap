@@ -71,6 +71,11 @@ function view(paths) {
     
     if(root) {
         
+      if(root === 'freak') {
+        if(get.length > 1) { mvc.v.page.freak.name({paths}); }
+        else { mvc.v.page.freak.index({paths}); }
+        resolve({paths});
+      }        
       if(root === 'video') {
         if(get.length > 1) { mvc.v.page.video.id({paths}); }
         else { mvc.v.page.video.index({paths}); }
