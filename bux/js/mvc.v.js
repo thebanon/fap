@@ -46,6 +46,35 @@ window.mvc['v'] = {
               var page = byId('page-index');
               page.innerHTML = html;
 
+              ajax('/json/www.index.json').then((j,json=JSON.parse(j)) => {                
+                var index = window.pages["index"] = json;
+                var freaks = query.shuffle.arr(json.freaks);
+                var html = ``; f = 0; 
+                do { html += `<picture><img src='/jpg/freak/`+freaks[f]+`.jpg'></picture>`; f++; }
+                while(f < 10 && f < freaks.length);
+                page.find('.stars').innerHTML = html;
+                tion.ialize(tion.ia);
+              });    
+
+              ajax('/json/volumes.json').then((j,json=JSON.parse(j)) => {      
+                var html = ``, volumes = json; f = 0;
+                do { 
+                  html += `<div data-href="/volume/`+Object.keys(volumes)[f]+`/">`;
+                    html += `<section>`;
+                    var frks = query.shuffle.arr(Object.values(volumes)[f].freaks);
+                    var ff = 0; do {
+                      console.log({frks},frks[ff],ff);
+                      html += `<div style="background-image:url(/jpg/model/`+frks[ff]+`.jpg)"></div>`;
+                    ff++; } while(ff < 3);
+                    html += `</section>`;
+                    html += `<a data-before="volume `+toWords(parseInt(Object.keys(Object.keys(volumes)[f])[f])+1)+`" data-after="`+Object.keys(volumes)[f]+`"></a>`;
+                  html += `</div>`; 
+                  f++;
+                }
+                while(f < page.find('.volumes').children.length);
+                page.find('.volumes').innerHTML = html;
+              });
+
               ajax('/json/videos.json').then((j) => {
                 var videos = query.shuffle.arr(Object.values(JSON.parse(j)));  console.log({videos});
                 if(videos.length > 0) { 
@@ -68,21 +97,6 @@ window.mvc['v'] = {
                 }
               });
 
-              ajax('/json/www.index.json').then((j,json=JSON.parse(j)) => {                
-                var index = window.pages["index"] = json;
-
-                var freaks = query.shuffle.arr(json.freaks);
-                var html = ``; f = 0; 
-                do { html += `<picture><img src='/jpg/avatar/`+freaks[f]+`.jpg'></picture>`; f++; }
-                while(f < 10 && f < freaks.length);
-                page.find('.stars').innerHTML = html;
-
-                var html = ``, volumes = json.volumes; f = 0;
-                do { html += `<div data-href="/volume/`+Object.keys(volumes)[f]+`/"><a data-before="volume `+toWords(parseInt(Object.keys(volumes)[f])+1)+`" data-after="`+volumes[f]+`"></a></div>`; f++; }
-                while(f < page.find('.volumes').children.length);
-                page.find('.volumes').innerHTML = html;
-                tion.ialize(tion.ia);
-              });    
               //ajax(api.endpoint()+'/v1/read/blocks',{data:mvc.m.block(page.find('feed')),dataType:"POST"}).then((j,json=JSON.parse(j)) => {
                 //mvc.v.page.home(html,json).then(() => tion.ialize(ion.ia));
               //}).catch(() => tion.ialize(ion.ia));
