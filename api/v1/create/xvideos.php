@@ -63,15 +63,6 @@ if($params > 0) {
             fwrite($file, json_encode($data["video"],JSON_PRETTY_PRINT));
             fclose($file);
 
-            $data["DIR"] = $dir = __DIR__."/../../../bux/json";
-            $data["glob"] = $glob = array_slice(scandir($dir.'/video'),2);
-            $arr = [];
-            foreach($glob as $file) {
-                $data["rows"][str_replace('.json','',$file)] = json_decode(str_replace('http:','https:',file_get_contents($dir.'/video/'.$file)));
-            }
-            $data["contents"] = $contents = json_encode($data["rows"],JSON_PRETTY_PRINT);
-            file_put_contents($dir.'/videos.json', $contents);
-
         }     
     }
 } else {

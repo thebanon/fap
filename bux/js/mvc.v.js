@@ -63,7 +63,6 @@ window.mvc['v'] = {
                     html += `<section>`;
                     var frks = query.shuffle.arr(Object.values(volumes)[f].freaks);
                     var ff = 0; do {
-                      console.log({frks},frks[ff],ff);
                       html += `<div style="background-image:url(/jpg/model/`+frks[ff].replace(/'/g, "%27")+`.jpg)"></div>`;
                     ff++; } while(ff < 3);
                     html += `</section>`;
@@ -76,11 +75,11 @@ window.mvc['v'] = {
               });
 
               ajax('/json/videos.json').then((j) => {
-                var videos = query.shuffle.arr(Object.values(JSON.parse(j)));  console.log({videos});
+                var videos = query.shuffle.arr(Object.values(JSON.parse(j)));
                 if(videos.length > 0) { 
                   var i = 0, html = ``; do {
                     var row = videos[i];
-                    var id = row.id; console.log({row});
+                    var id = row.id;
                     html += `<div class="media-video">`;
                       html += `<header class="header-video">`;
                         html += `<section class="section-video" data-href="/video/`+row.id+`/"><picture><img src="`+row.thumbnail+`"></picture></section>`;
