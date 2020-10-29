@@ -10,6 +10,17 @@ window.api = {
             video: (stars, id) => {
                 ajax(`https://api.fapbux.localhost/v1/read/xvideos/video/`+stars+`/https://xvideos.com/video`+id+`/`);
             }
-        }        
+        },
+        update: {
+            freaks: () => {
+                ajax(`https://api.fapbux.localhost/v1/update/cache/freaks`);                
+            },
+            videos: () => {
+                ajax(`https://api.fapbux.localhost/v1/update/cache/videos`);                
+            }
+        },
+        delete: {
+
+        }    
     }
 }
